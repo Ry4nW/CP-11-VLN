@@ -36,7 +36,7 @@ public class improvedRPS {
         String count;
 
         /* This loop ensures that the program will run continuously. Termination will occur when
-        the user inputs a empty value. */
+        the user inputs an empty value. */
 
         while (true) {
 
