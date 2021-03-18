@@ -51,7 +51,7 @@ public class Teacher {
         this.subject = subject;
     }
 
-    // Overrides the [toString()] method; prints out {Student} instance how we intend it to.
+    // Overrides the [toString()] method; prints out {Teacher} instance how we intend it to.
 
     @Override
     public String toString() {
