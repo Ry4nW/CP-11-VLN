@@ -8,8 +8,8 @@ public class arrays {
        return arr;
    }
 
-   public static int[] popIntArr(int[] arr) {
-       return Arrays.copyOf(arr, arr.length - 1);
+   public static int[] popIntArr(int[] a) {
+       return Arrays.copyOf(a, a.length - 1);
    }
 
    public static int[] insertIntArr(int[] arr, int value, int index) {
