@@ -21,7 +21,7 @@ public class RPS {
         boolean checkInput = true;
 
         /* This loop ensures that the program will run continuously. Termination will occur when
-        when the {run} variable is declared false. */
+        when {run} variable is declared false. */
 
         while (run) {
 
