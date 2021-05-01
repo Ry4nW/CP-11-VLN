@@ -4,15 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class readingText {
-
+    
+    // ArrayList to contain all of the lines, each as a separate element.
     private static ArrayList<String> lines = new ArrayList<>();
 
     private static void wordInFile(String word) {
 
         ArrayList<Integer> indexes = new ArrayList<>();
+        
+        // Double loop iterates though the entirety of all elements in each line (in this case, going through the ArrayList). 
 
         for (int i = 0; i <= lines.size() - 1; i++) {
-            for (int y = 0, j = word.length(); j < lines.get(i).length(); y++, j++) {
+            for (int y = 0, j = word.length() /* 2 variables to fit substring params */ ; j < lines.get(i).length(); y++, j++) {
 
                 if (lines.get(i).substring(y, j).equals(word)) {
                     indexes.add(i);
@@ -41,7 +44,7 @@ public class readingText {
 
         String line;
 
-        while ((line = bR.readLine()) != null) {
+        while ((line = bR.readLine()) != null /* When {readLine()} reads nothing, null is returned. */) {
             lines.add(line);
         }
         bR.close();
