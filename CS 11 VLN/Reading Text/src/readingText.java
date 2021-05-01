@@ -26,10 +26,8 @@ public class readingText {
         }
 
         System.out.println("Word: \"" + word + "\"");
-
-        System.out.println("Index locations in ArrayList containing word: " + indexes);
-
-        System.out.println("Lines containing word: " + linesInText);
+        System.out.println("Index location(s) in ArrayList containing word (nested): " + indexes);
+        System.out.println("Line number(s) containing word: " + linesInText);
         System.out.println("Total amount of word(s) in text: " + linesInText.size());
     }
     public static void main(String[] args) throws IOException {
