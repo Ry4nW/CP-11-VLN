@@ -4,21 +4,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class readingText {
-    
-    // ArrayList to contain all of the lines, each as a separate element.
+
     private static ArrayList<String> lines = new ArrayList<>();
 
     private static void wordInFile(String word) {
 
-        ArrayList<Integer> indexes = new ArrayList<>();
+        ArrayList<String> indexes = new ArrayList<>();
+        ArrayList<Integer> linesInText = new ArrayList<>();
         
-        // Double loop iterates though the entirety of all elements in each line (in this case, going through the ArrayList). 
+        // Double loop iterates though the entirety of all elements in each line (in this case, going through the ArrayList).
 
         for (int i = 0; i <= lines.size() - 1; i++) {
             for (int y = 0, j = word.length() /* 2 variables to fit substring params */ ; j < lines.get(i).length(); y++, j++) {
 
                 if (lines.get(i).substring(y, j).equals(word)) {
-                    indexes.add(i);
+                    indexes.add("[" + i + ", " + y + "]");
+                    linesInText.add(i);
                 }
 
             }
@@ -28,14 +29,8 @@ public class readingText {
 
         System.out.println("Index locations in ArrayList containing word: " + indexes);
 
-        ArrayList<Integer> lines = new ArrayList<>();
-
-        for (int i : indexes) {
-            lines.add(i + 1);
-        }
-
-        System.out.println("Lines containing word: " + lines );
-        System.out.println("Total amount of word(s) in text: " + lines.size());
+        System.out.println("Lines containing word: " + linesInText);
+        System.out.println("Total amount of word(s) in text: " + linesInText.size());
     }
     public static void main(String[] args) throws IOException {
 
@@ -49,6 +44,6 @@ public class readingText {
         }
         bR.close();
 
-        wordInFile("devices");
+        wordInFile("the");
     }
 }
