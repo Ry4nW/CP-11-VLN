@@ -19,7 +19,7 @@ public class readingText {
 
                 if (lines.get(i).substring(y, j).equals(word)) {
                     indexes.add("[" + i + ", " + y + "]");
-                    linesInText.add(i);
+                    linesInText.add(i + 1);
                 }
 
             }
