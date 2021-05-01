@@ -1,2 +1,2 @@
 # CS-11-VLN
-All assignments/projects related to my online CS course.
+All assignments/projects related to an online CS course.
