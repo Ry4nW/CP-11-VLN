@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+        <TabPane prefHeight="401.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Create Groups and Add Friends">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <VBox alignment="TOP_CENTER" layoutX="54.0" layoutY="-14.0" prefHeight="200.0" prefWidth="196.0" spacing="10.0" translateY="40.0">
+                                    <children>
+                                        <Label text="Name:" />
+                                        <Label text="Age:" />
+                                        <Label text="Specialty:" />
+                                        <Label text="Group:" />
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" layoutX="351.0" layoutY="-14.0" prefHeight="200.0" prefWidth="148.0" translateY="-25.0">
+                                    <children>
+                                        <Button fx:id="createFriendBtn" mnemonicParsing="false" onAction="#createFriend" text="Create Friend" translateY="10.0" />
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" layoutX="185.0" layoutY="-17.0" prefHeight="206.0" prefWidth="166.0" spacing="5.0" translateY="-3.0">
+                                    <children>
+                                        <TextField fx:id="nameField" />
+                                        <TextField fx:id="ageField" />
+                                        <TextField fx:id="specialtyField" />
+                                        <TextField fx:id="groupField" />
+                                        <Label fx:id="friendErrorMessage" prefHeight="17.0" prefWidth="271.0" translateY="30.0" />
+                                    </children>
+                                </VBox>
+                                <Label layoutX="133.0" layoutY="181.0" text="Groups" />
+                                <Button fx:id="createGroupBtn" layoutX="426.0" layoutY="226.0" mnemonicParsing="false" onAction="#createGroup" text="Create Group" />
+                                <ListView fx:id="groups1" layoutX="28.0" layoutY="206.0" prefHeight="153.0" prefWidth="267.0" />
+                                <Label layoutX="311.0" layoutY="199.0" text="New Group:" />
+                                <TextField fx:id="newGroupField" layoutX="395.0" layoutY="195.0" promptText="Enter group name" />
+                                <Label fx:id="groupErrorMessage" layoutX="384.0" layoutY="259.0" prefHeight="17.0" prefWidth="157.0" />
+                        <TextField fx:id="loadFriendField" layoutX="313.0" layoutY="324.0" promptText="Enter group(s)" />
+                        <Button fx:id="loadFriendBtn" layoutX="484.0" layoutY="324.0" mnemonicParsing="false" onAction="#loadFriends" text="Load Friend(s)" />
+                        <Label layoutX="313.0" layoutY="283.0" prefHeight="17.0" prefWidth="244.0" text="Enter a Group to load. If you want to load all " />
+                        <Label layoutX="313.0" layoutY="298.0" prefHeight="17.0" prefWidth="299.0" text="groups, leave it empty. You must have a group saved." />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Friend/Group List">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="600.0">
+                            <children>
+                                <Label layoutX="317.0" layoutY="29.0" text="Friend Information">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="319.0" layoutY="77.0" text="Name:" />
+                                <Label layoutX="319.0" layoutY="106.0" text="Age:" />
+                                <Label layoutX="318.0" layoutY="132.0" text="Specialty:" />
+                                <Label fx:id="friendLbl" layoutX="404.0" layoutY="77.0" />
+                                <Label fx:id="ageLbl" layoutX="404.0" layoutY="106.0" />
+                                <Label fx:id="specialtyLbl" layoutX="404.0" layoutY="132.0" />
+                                <Button fx:id="deleteFriendBtn" layoutX="478.0" layoutY="38.0" mnemonicParsing="false" onAction="#deleteFriend" prefHeight="10.0" prefWidth="90.0" text="Delete Friend" />
+                                <ListView fx:id="friendList" layoutX="27.0" layoutY="32.0" onMouseClicked="#displayFriend" prefHeight="328.0" prefWidth="248.0" />
+                                <Label layoutX="320.0" layoutY="180.0" prefHeight="32.0" prefWidth="97.0" text="Friend Groups">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <ListView fx:id="groups2" layoutX="319.0" layoutY="218.0" onMouseClicked="#displayGroup" prefHeight="141.0" prefWidth="250.0" />
+                                <Label layoutX="130.0" layoutY="6.0" text="Friends">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="saveFriendsBtn" layoutX="479.0" layoutY="73.0" mnemonicParsing="false" onAction="#saveFriends" text="Save friend(s)" />
+                                <Button fx:id="deleteGroupBtn" layoutX="480.0" layoutY="184.0" mnemonicParsing="false" onAction="#deleteGroup" text="Delete Group" />
+                        <Label fx:id="saveMessage" layoutX="444.0" layoutY="149.0" />
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</VBox>
