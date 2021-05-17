@@ -12,10 +12,12 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Controller {
-    private static ArrayList<Friend> friends = new ArrayList<>();
-    private static String group;
+
 
     public static ArrayList createAllFriends(String fileName) throws IOException {
+
+        ArrayList<Friend> friends = new ArrayList<>();
+
         FileReader fr = new FileReader(fileName);
         BufferedReader br = new BufferedReader(fr);
 
@@ -26,7 +28,7 @@ public class Controller {
             if (!line.equals(";")) {
                 friendString.append(line);
             } else {
-                parseFriend(friendString.toString());
+                friends.add(parseFriend(friendString.toString()));
                 friendString = new StringBuilder();
             }
 
@@ -35,7 +37,9 @@ public class Controller {
         return friends;
     }
 
-    private static void parseFriend(String str) {
+    private static Friend parseFriend(String str) {
+
+
         int p = 0;
         String name = "";
         String age = "";
@@ -67,16 +71,17 @@ public class Controller {
             }
         }
 
+        Friend friend = new Friend(name, Integer.parseInt(age), specialty, group);
+
         try {
             if (loadFriendField.getText().length() == 0 || group.equals(loadFriendField.getText())) {
-                friends.add(new Friend(name, Integer.parseInt(age), specialty, group));
-
+                return friend;
             }
 
         } catch (Exception NullPointerException) {
-            friends.add(new Friend(name, Integer.parseInt(age), specialty, group));
-
+            return friend;
         }
+        return friend;
 
     }
 
@@ -100,7 +105,7 @@ public class Controller {
     public Label specialtyLbl;
 
     public ListView<Friend> friendList = new ListView<>();
-    public ArrayList<Group> totalGroups = new ArrayList<>();
+    public static ArrayList<Group> totalGroups = new ArrayList<>();
 
     public Label friendErrorMessage;
     public Label groupErrorMessage;
@@ -187,6 +192,7 @@ public class Controller {
 
     public void deleteFriend(ActionEvent actionEvent) {
         deleteFriendBtn.setDisable(true);
+        groups2.getSelectionModel().getSelectedItem().friends.remove(friendList.getSelectionModel().getSelectedItem());
         friendList.getItems().remove(friendList.getSelectionModel().getSelectedItem());
 
         friendLbl.setText("");
@@ -250,11 +256,24 @@ public class Controller {
     }
 
     public void saveFriends(ActionEvent actionEvent) throws IOException {
+        FileWriter fw = new FileWriter("friends.txt");
+        BufferedWriter bw = new BufferedWriter(fw);
         if (groups2.getItems().isEmpty()) {
-            friendErrorMessage.setText("You have nothing to save.");
+            bw.write("");
+            bw.close();
+            saveMessage.setText("Friends successfully reset.");
+            saveFriendsBtn.setDisable(true);
+            deleteFriendBtn.setDisable(true);
+        } else if (groups2.getSelectionModel().getSelectedItem().friends.isEmpty()) {
+            bw.write("");
+            bw.close();
+            saveFriendsBtn.setDisable(true);
+            deleteFriendBtn.setDisable(true);
         } else {
             ObservableList<Group> list = groups2.getItems();
 
+            bw.write("");
+            bw.close();
             for (Group group : list) {
                 for (Friend friend : group.friends) {
                     friend.writeToFile();
@@ -262,8 +281,13 @@ public class Controller {
 
             }
 
+            for (Group group : list) {
+                group.friends.clear();
+            }
+
             groups1.getItems().clear();
             groups2.getItems().clear();
+            totalGroups.clear();
             friendList.getItems().clear();
 
             friendLbl.setText("");
@@ -273,7 +297,7 @@ public class Controller {
         }
 
         loadFriendBtn.setDisable(false);
-
+        deleteFriendBtn.setDisable(false);
     }
 
     public void deleteGroup(ActionEvent actionEvent) {
@@ -282,10 +306,16 @@ public class Controller {
         ageLbl.setText("");
         specialtyLbl.setText("");
 
+        for (int i = 0; i < totalGroups.size(); i++) {
+            if (groups2.getSelectionModel().getSelectedItem().equals(totalGroups.get(i))) {
+                totalGroups.remove(i);
+                break;
+            }
+        }
+
         friendList.getItems().clear();
         groups1.getItems().remove(groups2.getSelectionModel().getSelectedItem());
         groups2.getItems().remove(groups2.getSelectionModel().getSelectedItem());
-
 
         deleteGroupBtn.setDisable(true);
 
@@ -309,8 +339,23 @@ public class Controller {
         for (Friend f : friends) {
             groups2.getItems().add(f.group);
             groups1.getItems().add(f.group);
-            f.group.friends.add(f);
+
+
+            for (int i = 0; i < totalGroups.size(); i++) {
+                if (totalGroups.get(i).equals(f.group)) {
+                    f.group.friends.add(f);
+                    break;
+                } else if (i == (totalGroups.size() - 1)){
+                    totalGroups.add(f.group);
+                    f.group.friends.add(f);
+                    break;
+                }
+            }
+
+
+
         }
+
 
     }
 }
